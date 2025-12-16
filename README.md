@@ -18,6 +18,9 @@ A full-stack e-commerce website for selling lifestyle products including **Gypsu
 ### Homepage - Products Section
 ![Homepage Products](screenshots/homepage_products.png)
 
+### Admin Dashboard
+![Admin Dashboard](screenshots/admin_dashboard.png)
+
 ---
 
 ## ✨ Features
