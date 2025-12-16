@@ -1,0 +1,22 @@
+# Flex & Bliss Website Configuration
+
+# Enable PHP error logging (disable in production)
+php_flag display_errors on
+php_value error_reporting E_ALL
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Default charset
+AddDefaultCharset UTF-8
+
+# Error documents (optional)
+# ErrorDocument 404 /404.html
+# ErrorDocument 500 /500.html

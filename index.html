@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Flex & Bliss - Handcrafted gypsum decor, scented candles, jewelry and decorative items for your home">
+    <meta name="keywords"
+        content="gypsum decor, handcrafted candles, jewelry, home decor, decorative items, Bangladesh">
+    <meta name="author" content="Flex & Bliss">
+    <meta name="theme-color" content="#6366f1">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Flex & Bliss - Gypsum Decor, Candles & Jewelry Store">
+    <meta property="og:description"
+        content="Handcrafted gypsum decor, scented candles, jewelry and decorative items for your home">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Flex & Bliss - Gypsum Decor, Candles & Jewelry Store">
+    <meta name="twitter:description"
+        content="Handcrafted gypsum decor, scented candles, jewelry and decorative items for your home">
+
+    <title>Flex & Bliss - Gypsum Decor, Candles & Jewelry Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Shopping Cart</h2>
+            <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Subtotal:</span>
+                <span class="total-amount" id="totalAmount">৳0</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Wishlist Sidebar -->
+    <div class="cart-sidebar" id="wishlistSidebar">
+        <div class="cart-header">
+            <h2>My Wishlist</h2>
+            <button class="close-cart" id="closeWishlist">&times;</button>
+        </div>
+        <div class="cart-items" id="wishlistItems">
+            <div class="empty-cart">
+                <p>Your wishlist is empty</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Overlay -->
+    <div class="cart-overlay" id="wishlistOverlay"></div>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- Product Quick View Modal -->
+    <div class="modal" id="quickViewModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"
+        aria-hidden="true">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Account Modal -->
+    <div class="modal" id="accountModal" role="dialog" aria-modal="true" aria-labelledby="accountModalTitle"
+        aria-hidden="true">
+        <div class="modal-overlay" id="accountModalOverlay"></div>
+        <div class="modal-content account-modal-content">
+            <button class="modal-close" id="accountModalClose" aria-label="Close modal">&times;</button>
+            <div class="modal-header">
+                <h2 id="accountModalTitle">Create Your Account</h2>
+            </div>
+            <div class="modal-body">
+                <form id="accountForm" class="account-form">
+                    <div class="form-group">
+                        <label for="userName">Full Name</label>
+                        <input type="text" id="userName" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userEmail">Email Address</label>
+                        <input type="email" id="userEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userPhone">Phone Number</label>
+                        <input type="tel" id="userPhone" placeholder="Enter your phone number">
+                    </div>
+                    <div class="form-group">
+                        <label for="userAddress">Shipping Address</label>
+                        <textarea id="userAddress" rows="3" placeholder="Enter your address"></textarea>
+                    </div>
+                    <button type="submit" class="save-btn">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="modal" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle"
+        aria-hidden="true">
+        <div class="modal-overlay" id="contactModalOverlay"></div>
+        <div class="modal-content account-modal-content">
+            <button class="modal-close" id="contactModalClose" aria-label="Close modal">&times;</button>
+            <div class="modal-header">
+                <h2 id="contactModalTitle">Contact Info</h2>
+            </div>
+            <div class="modal-body">
+                <div class="contact-info-item" style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Mobile</h3>
+                    <p style="font-size: 1.25rem; font-weight: 600; color: var(--text-primary);">01911-133259</p>
+                </div>
+                <div class="contact-info-item">
+                    <h3 style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Email</h3>
+                    <p style="font-size: 1.25rem; font-weight: 600; color: var(--text-primary);">flexandbliss@gmail.com
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div class="modal" id="aboutModal" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle"
+        aria-hidden="true">
+        <div class="modal-overlay" id="aboutModalOverlay"></div>
+        <div class="modal-content account-modal-content">
+            <button class="modal-close" id="aboutModalClose" aria-label="Close modal">&times;</button>
+            <div class="modal-header">
+                <h2 id="aboutModalTitle">About Us</h2>
+            </div>
+            <div class="modal-body">
+                <p class="text-small" style="line-height: 1.6; color: var(--text-secondary);">
+                    Welcome to Flex & Bliss, your ultimate destination for lifestyle, fashion, and everyday essentials.
+                    We
+                    believe that shopping shouldn't just be a transaction—it should be an experience that brings you
+                    joy.
+                    The name says it all: Flex your style with our vast collection of trendsetting products, and find
+                    your
+                    Bliss in the convenience and satisfaction of a premium shopping experience. Whether you are
+                    upgrading
+                    your wardrobe, decking out your home, or looking for the latest gadgets, we have it all under one
+                    roof.
+                    Most importantly, in a world full of replicas, we stand firm on our promise of 100% Authenticity. At
+                    Flex & Bliss, authenticity is our heartbeat. We guarantee that every single item you order—from
+                    high-end
+                    electronics to designer fashion—is 100% genuine and sourced directly from authorized distributors.
+                    No
+                    fakes, no compromises. Just real quality for real people. ❤️
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Advanced Checkout Modal -->
+    <div class="modal" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="checkoutModalTitle"
+        aria-hidden="true">
+        <div class="modal-overlay" id="checkoutModalOverlay"></div>
+        <div class="modal-content checkout-modal-large">
+            <button class="modal-close" id="checkoutModalClose" aria-label="Close modal">&times;</button>
+
+            <!-- Checkout Progress Steps -->
+            <div class="checkout-progress"
+                style="display: flex; justify-content: center; gap: 0; margin-bottom: 2rem; padding: 0 1rem;">
+                <div class="checkout-step active" id="step1-indicator">
+                    <div class="step-circle">1</div>
+                    <span>Cart</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="checkout-step" id="step2-indicator">
+                    <div class="step-circle">2</div>
+                    <span>Details</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="checkout-step" id="step3-indicator">
+                    <div class="step-circle">3</div>
+                    <span>Payment</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="checkout-step" id="step4-indicator">
+                    <div class="step-circle">4</div>
+                    <span>Done</span>
+                </div>
+            </div>
+
+            <!-- Step 1: Order Summary -->
+            <div class="checkout-step-content active" id="checkout-step-1">
+                <h2 class="checkout-title">Order Summary</h2>
+
+                <div id="checkoutCartItems" style="max-height: 250px; overflow-y: auto; margin-bottom: 1.5rem;"></div>
+
+                <div class="order-totals"
+                    style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); padding: 1.25rem; border-radius: 12px; margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="color: #64748b;">Order ID:</span>
+                        <span id="checkoutOrderId"
+                            style="font-weight: 600; font-family: monospace; color: #1e293b;"></span>
+                    </div>
+                    <div id="checkoutDiscount"
+                        style="display: none; justify-content: space-between; margin-bottom: 0.5rem; color: #059669;">
+                        <span>Discount:</span>
+                        <span style="font-weight: 600;"></span>
+                    </div>
+                    <div
+                        style="display: flex; justify-content: space-between; padding-top: 0.75rem; border-top: 2px dashed #cbd5e1;">
+                        <span style="font-weight: 600; font-size: 1.1rem;">Total:</span>
+                        <span id="checkoutTotal" style="font-weight: 700; font-size: 1.25rem; color: #6366f1;"></span>
+                    </div>
+                </div>
+
+                <!-- Coupon Section -->
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="text" id="couponCode" placeholder="Enter coupon code"
+                            style="flex: 1; padding: 0.875rem; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem;">
+                        <button type="button" class="apply-coupon-btn" onclick="applyCoupon()"
+                            style="padding: 0.875rem 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">Apply</button>
+                    </div>
+                </div>
+
+                <button type="button" onclick="goToCheckoutStep(2)" class="checkout-next-btn"
+                    style="width: 100%; padding: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer;">Continue
+                    to Details →</button>
+            </div>
+
+            <!-- Step 2: Personal Details -->
+            <div class="checkout-step-content" id="checkout-step-2">
+                <h2 class="checkout-title">Shipping Details</h2>
+
+                <form id="checkoutForm" class="account-form">
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label for="checkoutName"
+                            style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Full Name
+                            *</label>
+                        <input type="text" id="checkoutName" required
+                            style="width: 100%; padding: 0.875rem; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem;">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div class="form-group">
+                            <label for="checkoutPhone"
+                                style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Phone
+                                *</label>
+                            <input type="tel" id="checkoutPhone" required placeholder="01XXXXXXXXX"
+                                style="width: 100%; padding: 0.875rem; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem;">
+                        </div>
+                        <div class="form-group">
+                            <label for="checkoutEmail"
+                                style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Email
+                                *</label>
+                            <input type="email" id="checkoutEmail" required
+                                style="width: 100%; padding: 0.875rem; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem;">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label for="checkoutAddress"
+                            style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Shipping
+                            Address *</label>
+                        <textarea id="checkoutAddress" rows="3" required placeholder="House, Road, Area, City"
+                            style="width: 100%; padding: 0.875rem; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem; resize: none;"></textarea>
+                    </div>
+                </form>
+
+                <div style="display: flex; gap: 1rem;">
+                    <button type="button" onclick="goToCheckoutStep(1)" class="checkout-back-btn"
+                        style="flex: 1; padding: 1rem; background: #e2e8f0; color: #475569; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer;">←
+                        Back</button>
+                    <button type="button" onclick="validateAndGoToPayment()" class="checkout-next-btn"
+                        style="flex: 2; padding: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer;">Continue
+                        to Payment →</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Payment Method Selection -->
+            <div class="checkout-step-content" id="checkout-step-3">
+                <h2 class="checkout-title">Select Payment Method</h2>
+
+                <div class="payment-methods"
+                    style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
+                    <!-- bKash -->
+                    <div class="payment-option" onclick="selectPaymentMethod('bkash')"
+                        style="padding: 1.25rem; border: 2px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 1rem;">
+                        <div
+                            style="width: 50px; height: 50px; background: linear-gradient(135deg, #e2136e 0%, #d11159 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                            <span style="color: white; font-weight: 700; font-size: 0.9rem;">bKash</span>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600; color: #1e293b;">bKash</div>
+                            <div style="font-size: 0.85rem; color: #64748b;">Pay with bKash mobile wallet</div>
+                        </div>
+                        <div style="margin-left: auto;">
+                            <div class="payment-radio"
+                                style="width: 24px; height: 24px; border: 2px solid #e2e8f0; border-radius: 50%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Nagad -->
+                    <div class="payment-option" onclick="selectPaymentMethod('nagad')"
+                        style="padding: 1.25rem; border: 2px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 1rem;">
+                        <div
+                            style="width: 50px; height: 50px; background: linear-gradient(135deg, #f26522 0%, #e55a1c 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                            <span style="color: white; font-weight: 700; font-size: 0.8rem;">Nagad</span>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600; color: #1e293b;">Nagad</div>
+                            <div style="font-size: 0.85rem; color: #64748b;">Pay with Nagad mobile wallet</div>
+                        </div>
+                        <div style="margin-left: auto;">
+                            <div class="payment-radio"
+                                style="width: 24px; height: 24px; border: 2px solid #e2e8f0; border-radius: 50%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Card -->
+                    <div class="payment-option" onclick="selectPaymentMethod('card')"
+                        style="padding: 1.25rem; border: 2px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 1rem;">
+                        <div
+                            style="width: 50px; height: 50px; background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                            <span style="color: white; font-weight: 700; font-size: 0.8rem;">CARD</span>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600; color: #1e293b;">Credit/Debit Card</div>
+                            <div style="font-size: 0.85rem; color: #64748b;">Visa, Mastercard, AMEX</div>
+                        </div>
+                        <div style="margin-left: auto;">
+                            <div class="payment-radio"
+                                style="width: 24px; height: 24px; border: 2px solid #e2e8f0; border-radius: 50%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Cash on Delivery -->
+                    <div class="payment-option" onclick="selectPaymentMethod('cod')"
+                        style="padding: 1.25rem; border: 2px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 1rem;">
+                        <div
+                            style="width: 50px; height: 50px; background: linear-gradient(135deg, #059669 0%, #047857 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                            <span style="color: white; font-weight: 700; font-size: 0.8rem;">COD</span>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600; color: #1e293b;">Cash on Delivery</div>
+                            <div style="font-size: 0.85rem; color: #64748b;">Pay when you receive</div>
+                        </div>
+                        <div style="margin-left: auto;">
+                            <div class="payment-radio"
+                                style="width: 24px; height: 24px; border: 2px solid #e2e8f0; border-radius: 50%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- bKash Payment UI -->
+                <div id="bkash-payment-ui" class="payment-ui" style="display: none;">
+                    <div
+                        style="background: linear-gradient(135deg, #e2136e 0%, #d11159 100%); padding: 1.5rem; border-radius: 16px; color: white; margin-bottom: 1rem;">
+                        <div style="text-align: center; margin-bottom: 1rem;">
+                            <div style="font-size: 2rem; font-weight: 700;">bKash</div>
+                            <div style="opacity: 0.9;">Payment Gateway</div>
+                        </div>
+                        <div
+                            style="background: rgba(255,255,255,0.15); padding: 1rem; border-radius: 12px; margin-bottom: 1rem;">
+                            <div style="font-size: 0.85rem; opacity: 0.9;">Amount to Pay</div>
+                            <div id="bkashAmount" style="font-size: 1.75rem; font-weight: 700;"></div>
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">Your bKash
+                                Number</label>
+                            <input type="tel" id="bkashNumber" placeholder="01XXXXXXXXX"
+                                style="width: 100%; padding: 0.875rem; border: none; border-radius: 10px; font-size: 1rem; background: rgba(255,255,255,0.95); color: #1e293b;">
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">Enter PIN</label>
+                            <div style="display: flex; gap: 0.5rem; justify-content: center;">
+                                <input type="password" maxlength="1" class="pin-input"
+                                    style="width: 50px; height: 50px; text-align: center; font-size: 1.5rem; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #1e293b;">
+                                <input type="password" maxlength="1" class="pin-input"
+                                    style="width: 50px; height: 50px; text-align: center; font-size: 1.5rem; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #1e293b;">
+                                <input type="password" maxlength="1" class="pin-input"
+                                    style="width: 50px; height: 50px; text-align: center; font-size: 1.5rem; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #1e293b;">
+                                <input type="password" maxlength="1" class="pin-input"
+                                    style="width: 50px; height: 50px; text-align: center; font-size: 1.5rem; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #1e293b;">
+                                <input type="password" maxlength="1" class="pin-input"
+                                    style="width: 50px; height: 50px; text-align: center; font-size: 1.5rem; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #1e293b;">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" onclick="processPayment('bkash')" id="bkashPayBtn"
+                        style="width: 100%; padding: 1rem; background: linear-gradient(135deg, #e2136e 0%, #d11159 100%); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer;">Confirm
+                        & Pay</button>
+                </div>
+
+                <!-- Nagad Payment UI -->
+                <div id="nagad-payment-ui" class="payment-ui" style="display: none;">
+                    <div
+                        style="background: linear-gradient(135deg, #f26522 0%, #e55a1c 100%); padding: 1.5rem; border-radius: 16px; color: white; margin-bottom: 1rem;">
+                        <div style="text-align: center; margin-bottom: 1rem;">
+                            <div style="font-size: 2rem; font-weight: 700;">Nagad</div>
+                            <div style="opacity: 0.9;">Digital Payment</div>
+                        </div>
+                        <div
+                            style="background: rgba(255,255,255,0.15); padding: 1rem; border-radius: 12px; margin-bottom: 1rem;">
+                            <div style="font-size: 0.85rem; opacity: 0.9;">Amount to Pay</div>
+                            <div id="nagadAmount" style="font-size: 1.75rem; font-weight: 700;"></div>
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">Your Nagad
+                                Number</label>
+                            <input type="tel" id="nagadNumber" placeholder="01XXXXXXXXX"
+                                style="width: 100%; padding: 0.875rem; border: none; border-radius: 10px; font-size: 1rem; background: rgba(255,255,255,0.95); color: #1e293b;">
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">Enter PIN</label>
+                            <div style="display: flex; gap: 0.5rem; justify-content: center;">
+                                <input type="password" maxlength="1" class="nagad-pin-input"
+                                    style="width: 50px; height: 50px; text-align: center; font-size: 1.5rem; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #1e293b;">
+                                <input type="password" maxlength="1" class="nagad-pin-input"
+                                    style="width: 50px; height: 50px; text-align: center; font-size: 1.5rem; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #1e293b;">
+                                <input type="password" maxlength="1" class="nagad-pin-input"
+                                    style="width: 50px; height: 50px; text-align: center; font-size: 1.5rem; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #1e293b;">
+                                <input type="password" maxlength="1" class="nagad-pin-input"
+                                    style="width: 50px; height: 50px; text-align: center; font-size: 1.5rem; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #1e293b;">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" onclick="processPayment('nagad')" id="nagadPayBtn"
+                        style="width: 100%; padding: 1rem; background: linear-gradient(135deg, #f26522 0%, #e55a1c 100%); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer;">Confirm
+                        & Pay</button>
+                </div>
+
+                <!-- Card Payment UI -->
+                <div id="card-payment-ui" class="payment-ui" style="display: none;">
+                    <div
+                        style="background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%); padding: 1.5rem; border-radius: 16px; color: white; margin-bottom: 1rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div style="font-size: 1.25rem; font-weight: 700;">Card Payment</div>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <span
+                                    style="background: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; color: #1e40af; font-weight: 600;">VISA</span>
+                                <span
+                                    style="background: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; color: #1e40af; font-weight: 600;">MC</span>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; opacity: 0.9;">Card
+                                Number</label>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19"
+                                style="width: 100%; padding: 0.875rem; border: none; border-radius: 10px; font-size: 1rem; background: rgba(255,255,255,0.95); color: #1e293b; letter-spacing: 2px;">
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                            <div>
+                                <label
+                                    style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; opacity: 0.9;">Expiry
+                                    Date</label>
+                                <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5"
+                                    style="width: 100%; padding: 0.875rem; border: none; border-radius: 10px; font-size: 1rem; background: rgba(255,255,255,0.95); color: #1e293b;">
+                            </div>
+                            <div>
+                                <label
+                                    style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; opacity: 0.9;">CVV</label>
+                                <input type="password" id="cardCvv" placeholder="•••" maxlength="4"
+                                    style="width: 100%; padding: 0.875rem; border: none; border-radius: 10px; font-size: 1rem; background: rgba(255,255,255,0.95); color: #1e293b;">
+                            </div>
+                        </div>
+                        <div>
+                            <label
+                                style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; opacity: 0.9;">Cardholder
+                                Name</label>
+                            <input type="text" id="cardName" placeholder="Name on card"
+                                style="width: 100%; padding: 0.875rem; border: none; border-radius: 10px; font-size: 1rem; background: rgba(255,255,255,0.95); color: #1e293b; text-transform: uppercase;">
+                        </div>
+                    </div>
+                    <div
+                        style="background: rgba(255,255,255,0.95); padding: 1rem; border-radius: 12px; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #64748b;">Total Amount:</span>
+                        <span id="cardAmount" style="font-size: 1.25rem; font-weight: 700; color: #1e40af;"></span>
+                    </div>
+                    <button type="button" onclick="processPayment('card')" id="cardPayBtn"
+                        style="width: 100%; padding: 1rem; background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer;">Pay
+                        Securely</button>
+                </div>
+
+                <!-- COD Confirmation -->
+                <div id="cod-payment-ui" class="payment-ui" style="display: none;">
+                    <div
+                        style="background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 2rem; border-radius: 16px; color: white; text-align: center; margin-bottom: 1rem;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;"><svg width="64" height="64"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="1" y="4" width="22" height="16" rx="2" />
+                                <line x1="1" y1="10" x2="23" y2="10" />
+                            </svg></div>
+                        <div style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Cash on Delivery</div>
+                        <div style="opacity: 0.9; margin-bottom: 1rem;">Pay <span id="codAmount"
+                                style="font-weight: 700;"></span> when your order arrives</div>
+                        <div
+                            style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 10px; font-size: 0.9rem;">
+                            - No advance payment required<br>
+                            - Inspect before you pay<br>
+                            - Easy returns within 7 days
+                        </div>
+                    </div>
+                    <button type="button" onclick="processPayment('cod')" id="codPayBtn"
+                        style="width: 100%; padding: 1rem; background: linear-gradient(135deg, #059669 0%, #047857 100%); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer;">Confirm
+                        Order</button>
+                </div>
+
+                <button type="button" onclick="goToCheckoutStep(2)" class="checkout-back-btn" id="payment-back-btn"
+                    style="width: 100%; padding: 1rem; background: #e2e8f0; color: #475569; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 1rem;">←
+                    Back to Details</button>
+            </div>
+
+            <!-- Step 4: Order Confirmation -->
+            <div class="checkout-step-content" id="checkout-step-4">
+                <div style="text-align: center; padding: 2rem 0;">
+                    <div class="success-animation"
+                        style="width: 100px; height: 100px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; animation: bounceIn 0.6s ease;">
+                        <span style="font-size: 3rem; color: white;">✓</span>
+                    </div>
+                    <h2 style="font-size: 1.75rem; color: #059669; margin-bottom: 0.5rem;">Order Confirmed!</h2>
+                    <p style="color: #64748b; margin-bottom: 2rem;">Thank you for your purchase</p>
+
+                    <div
+                        style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); padding: 1.5rem; border-radius: 16px; margin-bottom: 1.5rem; text-align: left;">
+                        <div
+                            style="display: flex; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px dashed #cbd5e1;">
+                            <span style="color: #64748b;">Order ID</span>
+                            <span id="confirmOrderId"
+                                style="font-weight: 700; font-family: monospace; color: #1e293b;"></span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <span style="color: #64748b;">Payment Method</span>
+                            <span id="confirmPaymentMethod" style="font-weight: 600; color: #1e293b;"></span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <span style="color: #64748b;">Total Paid</span>
+                            <span id="confirmTotal"
+                                style="font-weight: 700; font-size: 1.25rem; color: #6366f1;"></span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #64748b;">Status</span>
+                            <span
+                                style="background: #fef3c7; color: #92400e; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Pending</span>
+                        </div>
+                    </div>
+
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1.5rem;">
+                        A confirmation email has been sent to your email address.<br>
+                        You can track your order in your dashboard.
+                    </p>
+
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="dashboard.php"
+                            style="flex: 1; padding: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; text-decoration: none; text-align: center;">View
+                            Orders</a>
+                        <button type="button" onclick="closeCheckoutModal(); location.reload();"
+                            style="flex: 1; padding: 1rem; background: #e2e8f0; color: #475569; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer;">Continue
+                            Shopping</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <div class="header-contact">
+                    </div>
+                    <div class="header-links">
+                        <a href="#about">About</a>
+                        <a href="#contact">Contact</a>
+                        <a href="login.php">Login</a>
+                        <a href="register.php">Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Animated Offer Banner -->
+        <div class="offer-banner" id="offerBanner">
+            <div class="offer-content">
+                <span class="offer-icon">🔥</span>
+                <span class="offer-text" id="offerText">Special Offer: Get 20% OFF on Gypsum Decor! Use code:
+                    GYPSUM20</span>
+                <span class="offer-icon">🔥</span>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <div class="header-main-content">
+                    <div class="logo">
+                        <a href="#home" style="text-decoration: none; color: inherit;">
+                            <h1>Flex & Bliss</h1>
+                            <p>Owned by Rukaiya Binta Hossain Ekra</p>
+                        </a>
+                    </div>
+
+                    <div class="search-bar">
+                        <input type="text" id="searchInput" placeholder="Search for products..."
+                            aria-label="Search products">
+                        <button class="search-btn" aria-label="Search" type="button">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                        </button>
+                        <div class="search-results" id="searchResults"></div>
+                    </div>
+
+                    <div class="header-actions">
+                        <button class="wishlist-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                </path>
+                            </svg>
+                            <span class="badge">0</span>
+                        </button>
+                        <button class="cart-btn" id="cartBtn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6">
+                                </path>
+                            </svg>
+                            <span class="badge" id="cartCount">0</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="header-nav">
+            <div class="container">
+                <div class="nav-content">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu"
+                        aria-expanded="false">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a href="#home" class="active">Home</a></li>
+                        <li><a href="#shop">Shop</a></li>
+                        <li class="has-dropdown">
+                            <a href="#categories">Categories</a>
+                            <ul class="dropdown">
+                                <li><a href="#" data-category="all">All Products</a></li>
+                                <li><a href="#" data-category="gypsum">Gypsum</a></li>
+                                <li><a href="#" data-category="candles">Candles</a></li>
+                                <li><a href="#" data-category="jewelry">Jewelry</a></li>
+                                <li><a href="#" data-category="concrete">Concrete</a></li>
+                                <li><a href="#" data-category="soap">Soap</a></li>
+                                <li><a href="#" data-category="decorative">Decorative</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-slider">
+            <div class="hero-slide active">
+                <video class="hero-video" autoplay muted loop playsinline>
+                    <source src="images/hero_gypsum.mp4.mp4" type="video/mp4">
+                </video>
+                <div class="hero-bg-animate"></div>
+                <div class="hero-overlay"></div>
+                <div class="container">
+                    <div class="hero-content">
+                        <span class="hero-tag">New Collection</span>
+                        <h1>Handcrafted Gypsum Decor</h1>
+                        <p>Transform your space with our elegant handcrafted gypsum decorative pieces
+                        </p>
+                        <a href="#shop" class="hero-btn">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slide">
+                <video class="hero-video" autoplay muted loop playsinline>
+                    <source src="images/hero_candles.mp4.mp4" type="video/mp4">
+                </video>
+                <div class="hero-bg-animate"></div>
+                <div class="hero-overlay"></div>
+                <div class="container">
+                    <div class="hero-content">
+                        <span class="hero-tag">Best Sellers</span>
+                        <h1>Scented Candles Collection</h1>
+                        <p>Create the perfect ambiance with our premium scented candles</p>
+                        <a href="#shop" class="hero-btn">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slide">
+                <video class="hero-video" autoplay muted loop playsinline>
+                    <source src="images/hero_jewelry.mp4.mp4" type="video/mp4">
+                </video>
+                <div class="hero-bg-animate"></div>
+                <div class="hero-overlay"></div>
+                <div class="container">
+                    <div class="hero-content">
+                        <span class="hero-tag">Trending Now</span>
+                        <h1>Bohemian Jewelry & Accessories</h1>
+                        <p>Discover unique handcrafted jewelry pieces for every style</p>
+                        <a href="#shop" class="hero-btn">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <div class="section-header">
+                <h2>Shop by Category</h2>
+                <p>Explore our handcrafted collections</p>
+            </div>
+            <div class="category-grid">
+                <div class="category-card" data-category="gypsum">
+                    <div class="category-icon">
+                        <img src="gypsum_decor_icon.png" alt="Gypsum Decor"
+                            style="width: 150px; height: 150px; object-fit: contain;">
+                    </div>
+                    <h3>Gypsum Decor</h3>
+                    <p>Elegant handcrafted gypsum decorative pieces</p>
+                    <a href="#" class="category-link">Shop Now →</a>
+                </div>
+                <div class="category-card" data-category="candles">
+                    <div class="category-icon">
+                        <img src="scented_candles_icon.png" alt="Scented Candles"
+                            style="width: 150px; height: 150px; object-fit: contain;">
+                    </div>
+                    <h3>Scented Candles</h3>
+                    <p>Premium candles for the perfect ambiance</p>
+                    <a href="#" class="category-link">Shop Now →</a>
+                </div>
+                <div class="category-card" data-category="jewelry">
+                    <div class="category-icon">
+                        <img src="jewelry_icon.png" alt="Jewelry"
+                            style="width: 150px; height: 150px; object-fit: contain;">
+                    </div>
+                    <h3>Jewelry</h3>
+                    <p>Unique handcrafted jewelry and accessories</p>
+                    <a href="#" class="category-link">Shop Now →</a>
+                </div>
+                <div class="category-card" data-category="concrete">
+                    <div class="category-icon">
+                        <img src="concrete_items_icon.png" alt="Concrete Items"
+                            style="width: 150px; height: 150px; object-fit: contain;">
+                    </div>
+                    <h3>Concrete Items</h3>
+                    <p>Modern concrete decor and planters</p>
+                    <a href="#" class="category-link">Shop Now →</a>
+                </div>
+                <div class="category-card" data-category="soap">
+                    <div class="category-icon">
+                        <img src="soap_care_icon.png" alt="Soap & Care"
+                            style="width: 150px; height: 150px; object-fit: contain;">
+                    </div>
+                    <h3>Soap & Care</h3>
+                    <p>Natural handmade soaps and personal care</p>
+                    <a href="#" class="category-link">Shop Now →</a>
+                </div>
+                <div class="category-card" data-category="decorative">
+                    <div class="category-icon">
+                        <img src="home_decor_icon.png" alt="Home Decor"
+                            style="width: 150px; height: 150px; object-fit: contain;">
+                    </div>
+                    <h3>Home Decor</h3>
+                    <p>Beautiful decorative items for your home</p>
+                    <a href="#" class="category-link">Shop Now →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="shop">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Products</h2>
+                <p>Handcrafted with love and attention to detail</p>
+            </div>
+            <div class="product-filters">
+                <div class="filter-group">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="gypsum">Gypsum</button>
+                    <button class="filter-btn" data-category="candles">Candles</button>
+                    <button class="filter-btn" data-category="jewelry">Jewelry</button>
+                    <button class="filter-btn" data-category="concrete">Concrete</button>
+                    <button class="filter-btn" data-category="soap">Soap</button>
+                    <button class="filter-btn" data-category="decorative">Decorative</button>
+                </div>
+
+                <!-- Price Filter -->
+                <div class="price-filter">
+                    <label>Max Price:</label>
+                    <input type="range" id="priceSlider" class="price-slider" min="0" max="10000" value="10000"
+                        step="100">
+                    <span class="price-value" id="priceValue">৳10,000</span>
+                </div>
+
+                <select id="sortSelect" class="sort-select">
+                    <option value="featured">Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="name">Name: A to Z</option>
+                    <option value="rating">Top Rated</option>
+                </select>
+            </div>
+            <div class="product-grid" id="productGrid">
+                <!-- Products will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Subscribe to Our Newsletter</h2>
+                <p>Get the latest updates on new products and exclusive offers</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Flex & Bliss</h3>
+                    <p>Your trusted partner for handcrafted gypsum decor, scented candles, jewelry and
+                        decorative items.
+                    </p>
+                    <h5 style="margin-top: 1rem; margin-bottom: 0.5rem; color: var(--text-primary);">Follow Flex & Bliss
+                    </h5>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=100084839035864" target="_blank"
+                            rel="noopener noreferrer" aria-label="Flex & Bliss Facebook" title="Flex & Bliss Facebook">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/flex_and_bliss?igsh=MTVnYm9uaDk2eGV5ZA==" target="_blank"
+                            rel="noopener noreferrer" aria-label="Flex & Bliss Instagram"
+                            title="Flex & Bliss Instagram">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Owner</h4>
+                    <p style="margin-bottom: 0.5rem; font-size: 0.95rem; font-weight: 600;">Rukaiya Binta Hossain Ekra
+                    </p>
+                    <p
+                        style="margin-bottom: 1rem; font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; font-style: italic;">
+                        "I am Rukaiya Binta Hossain Ekra—a soft-hearted marketer, vlogger, and artisan passionate about
+                        creating with kindness."</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/rukaiya.binta.hossain.ekra" target="_blank"
+                            rel="noopener noreferrer" aria-label="Rukaiya's Facebook" title="Rukaiya's Facebook">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/_rukey._?igsh=MTV0eGRrd2JkdnZnaw==" target="_blank"
+                            rel="noopener noreferrer" aria-label="Rukaiya's Instagram" title="Rukaiya's Instagram">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#shop">Shop</a></li>
+                        <li><a href="#brands">Brands</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#shipping">Shipping Info</a></li>
+                        <li><a href="#returns">Returns</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#terms">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li>📧 info@flexbliss.com</li>
+                        <li>📍 Dhaka, Bangladesh</li>
+                        <li>🕐 Mon-Sat: 9AM-8PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 1998 Flex & Bliss. All rights reserved.</p>
+                <p>Developed by Sarfaraz Ahamed Shovon</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="products.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
